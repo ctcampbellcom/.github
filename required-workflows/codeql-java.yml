@@ -1,0 +1,18 @@
+name: CodeQL for Java
+
+jobs:
+  codeql:
+    name: Analyze Java
+    runs-on: ubuntu-latest
+    steps:
+        - uses: github/codeql-action/init@v2.22.3
+          name: CodeQL init
+          with:
+            languages: java
+        - uses: github/codeql-action/autobuild@v2.22.3
+          name: CodeQL autobuild
+        - uses: github/codeql-action/analyze@v2.22.3
+          name: CodeQL analyze
+          with:
+            category: "/language:java"
+          
