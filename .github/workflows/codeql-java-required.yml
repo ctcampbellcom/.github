@@ -1,8 +1,9 @@
 name: CodeQL for Java
 
 on:
+  pull_request:
   workflow_dispatch:
-  
+
 jobs:
   codeql:
     name: Analyze Java
