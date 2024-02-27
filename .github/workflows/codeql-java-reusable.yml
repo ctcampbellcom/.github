@@ -6,17 +6,17 @@ on:
       query-pack:
         description: 'The name of the query pack to run'
         type: string
-        required: true
+        required: false
         default: 'java-code-scanning.qls'
       java-version:
         description: 'The version of Java to use'
         type: string
-        required: true
+        required: false
         default: '17'
       java-distribution:
         description: 'The distribution of Java to use'
         type: string
-        required: true
+        required: false
         default: 'temurin'
 
 jobs:
