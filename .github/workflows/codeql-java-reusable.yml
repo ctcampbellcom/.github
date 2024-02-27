@@ -20,7 +20,7 @@ on:
         default: 'temurin'
 
 jobs:
-  codeql:
+  codeql-for-java:
     name: CodeQL for Java
     runs-on: ubuntu-latest
     steps:
