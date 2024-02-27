@@ -8,20 +8,35 @@ on:
         type: string
         required: true
         default: 'java-code-scanning.qls'
+      java-version:
+        description: 'The version of Java to use'
+        type: string
+        required: true
+        default: '17'
+      java-distribution:
+        description: 'The distribution of Java to use'
+        type: string
+        required: true
+        default: 'temurin'
 
 jobs:
   codeql:
     name: Analyze Java
     runs-on: ubuntu-latest
     steps:
-        - uses: github/codeql-action/init@v2.22.3
+        - uses: actions/checkout@v4
+        - uses: actions/setup-java@v4
+          with:
+            java-version: ${{ github.event.inputs.java-version }}
+            distribution: ${{ github.event.inputs.java-distribution }}
+        - uses: github/codeql-action/init@v3
           name: CodeQL init
           with:
             languages: java
             queries: ${{ github.event.inputs.query-pack }}
-        - uses: github/codeql-action/autobuild@v2.22.3
+        - uses: github/codeql-action/autobuild@v3
           name: CodeQL autobuild
-        - uses: github/codeql-action/analyze@v2.22.3
+        - uses: github/codeql-action/analyze@v3
           name: CodeQL analyze
           with:
             category: "/language:java"
