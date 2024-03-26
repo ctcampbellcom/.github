@@ -24,19 +24,19 @@ jobs:
     name: CodeQL for Java
     runs-on: ubuntu-latest
     steps:
-        - uses: actions/checkout@v4
-        - uses: actions/setup-java@v4
+        - uses: actions/checkout@cd7d8d697e10461458bc61a30d094dc601a8b017
+        - uses: actions/setup-java@99b8673ff64fbf99d8d325f52d9a5bdedb8483e9
           with:
             java-version: ${{ inputs.java-version }}
             distribution: ${{ inputs.java-distribution }}
-        - uses: github/codeql-action/init@v3
+        - uses: github/codeql-action/init@956f09c2ef1926b580554b9014cfb8a51abf89dd
           name: CodeQL init
           with:
             languages: java
             queries: ${{ inputs.query-pack }}
-        - uses: github/codeql-action/autobuild@v3
+        - uses: github/codeql-action/autobuild@956f09c2ef1926b580554b9014cfb8a51abf89dd
           name: CodeQL autobuild
-        - uses: github/codeql-action/analyze@v3
+        - uses: github/codeql-action/analyze@956f09c2ef1926b580554b9014cfb8a51abf89dd
           name: CodeQL analyze
           with:
             category: "/language:java"
