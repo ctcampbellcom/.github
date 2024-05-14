@@ -9,13 +9,24 @@ jobs:
     name: Analyze Java
     runs-on: ubuntu-latest
     steps:
-        - uses: github/codeql-action/init@v2.22.3
-          name: CodeQL init
-          with:
-            languages: java
-        - uses: github/codeql-action/autobuild@v2.22.3
-          name: CodeQL autobuild
-        - uses: github/codeql-action/analyze@v2.22.3
-          name: CodeQL analyze
-          with:
-            category: "/language:java"
+        - name: CodeQL init
+          run: |
+            gh extensions install github/gh-codeql
+            gh codeql list-installed
+            gh codeql database create ./codeql-db \
+              --language=java \
+              --overwrite
+        - name: CodeQL analyze
+          run: |
+            gh codeql database analyze ./codeql-db \
+              --format=sarif-latest \
+              --output=codeql-results.sarif
+        - name: CodeQL results upload
+          run: |
+            gh codeql github upload-results \
+              --sarif=codeql-results.sarif \
+              --repository=${{ github.repository }} \
+              --ref=${{ github.ref }} \
+              --commit=${{ github.sha }}'
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
