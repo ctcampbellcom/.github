@@ -4,6 +4,10 @@ on:
   pull_request:
   workflow_dispatch:
 
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 jobs:
   codeql:
     name: Analyze Java
@@ -28,5 +32,3 @@ jobs:
               --repository=${{ github.repository }} \
               --ref=${{ github.ref }} \
               --commit=${{ github.sha }}'
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
