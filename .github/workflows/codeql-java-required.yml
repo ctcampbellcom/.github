@@ -24,6 +24,7 @@ jobs:
           run: |
             gh extensions install github/gh-codeql
             gh codeql set-version latest
+            gh codeql pack download codeql/java-queries
             gh codeql database create ./codeql-db \
               --language=java \
               --overwrite
