@@ -17,6 +17,7 @@ jobs:
           uses: actions/checkout@v4
         - name: CodeQL init
           run: |
+            gh extensions install github/gh-codeql
             gh codeql list-installed
             gh codeql database create ./codeql-db \
               --language=java \
