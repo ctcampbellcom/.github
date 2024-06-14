@@ -45,3 +45,7 @@ jobs:
               --repository=${{ github.repository }} \
               --ref=${{ github.ref }} \
               --commit=${{ github.sha }}
+        - name: Archive SARIF
+          uses: actions/upload-artifact@v4
+          with:
+            path: codeql-results.sarif
